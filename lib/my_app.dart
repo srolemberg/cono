@@ -1,4 +1,5 @@
-import "package:cono/home/home_v2_page.dart";
+import "package:cono/color_schemes.g.dart";
+import "package:cono/public/login/new/public_login_new_page.dart";
 import "package:flutter/material.dart";
 
 class MyApp extends StatelessWidget {
@@ -8,8 +9,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) => MaterialApp(
         title: "Cono Demo",
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          useMaterial3: true,
+          colorScheme: lightColorScheme,
         ),
-        home: const HomeV2Page(),
+        darkTheme: ThemeData(
+          useMaterial3: true,
+          colorScheme: darkColorScheme,
+        ),
+        home: const PublicLoginNewPage(),
       );
 }
