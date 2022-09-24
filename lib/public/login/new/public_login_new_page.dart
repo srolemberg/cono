@@ -1,3 +1,4 @@
+import "package:cono/global_theme.dart";
 import "package:flutter/material.dart";
 
 class PublicLoginNewPage extends StatefulWidget {
@@ -12,6 +13,23 @@ class _PublicLoginNewPageState extends State<PublicLoginNewPage> {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           title: const Text("Cono"),
+          actions: <Widget>[
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  GlobalTheme.requestThemeChange(context);
+                });
+              },
+              icon: Icon(
+                GlobalTheme.checkStoredColorScheme(
+                          GlobalTheme.instanceFromStorageTheme(),
+                        ) ==
+                        GlobalTheme.themeValueLight
+                    ? Icons.dark_mode
+                    : Icons.light_mode,
+              ),
+            )
+          ],
         ),
         body: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints viewportConstraints) =>
