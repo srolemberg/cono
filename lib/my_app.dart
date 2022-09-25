@@ -1,8 +1,9 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import "package:cono/global_theme.dart";
-import "package:cono/public/login/new/public_login_new_page.dart";
+import "package:cono/public/login/login_route_structure.dart";
 import "package:flutter/material.dart";
+import "package:go_router/go_router.dart";
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -16,6 +17,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   late ColorScheme _colorScheme;
+  late GoRouter _router;
 
   @override
   void initState() {
@@ -25,17 +27,25 @@ class _MyAppState extends State<MyApp> {
         GlobalTheme.instanceFromStorageTheme(),
       ),
     );
+
+    _router = GoRouter(
+      routes: <GoRoute>[
+        LoginRouteStructure.object,
+      ],
+    );
   }
 
   @override
-  Widget build(BuildContext context) => MaterialApp(
+  Widget build(BuildContext context) => MaterialApp.router(
+        routeInformationProvider: _router.routeInformationProvider,
+        routeInformationParser: _router.routeInformationParser,
+        routerDelegate: _router.routerDelegate,
         title: "Cono Demo",
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           useMaterial3: true,
           colorScheme: _colorScheme,
         ),
-        home: const PublicLoginNewPage(),
       );
 
   void changeTheme(ColorScheme colorScheme) {
